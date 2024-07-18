@@ -6,6 +6,8 @@ import Profile from "./Profile/Profile";
 import ToggleThem from "./ToggleThem/ToggleThem";
 import Search from "./Search/Search";
 import ModalC from "./Modals/Modal";
+import { resultSearch } from "@/mock/resultSearch";
+import ModalSetting from "./ModalSetting/ModalSetting";
 
 function LeftSideBar({
   open,
@@ -67,17 +69,17 @@ function LeftSideBar({
   ];
   return (
     <div
-      className={`${show ? "" : "hidden"}  ${open ? "w-[410px]" : "w-[95px]"}`}
+      className={`${show ? "" : "hidden"}  ${open ? "w-[410px]" : "w-[70px]"}`}
     >
       <div
-        className={`fixed h-[100%] bg-n-7  left-0 top-0 p-4 flex flex-col justify-between`}
+        className={`fixed h-[100%] bg-n-7 z-50 left-0 top-0 p-2 md:p-3 flex flex-col justify-between`}
       >
-        <div className="flex  items-center flex-col gap-8">
+        <div className="flex  items-center flex-col gap-y-8">
           <div className="flex items-center gap-5 h-16 justify-between">
             {open && <Logo />}
             <div className="cursor-pointer" onClick={() => setOpen(!open)}>
               <Icon
-                name={open ? "toggle-on" : "toggle-off"}
+                name={!open ? "toggle-on" : "toggle-off"}
                 className="fill-n-4"
               />
             </div>
@@ -91,8 +93,23 @@ function LeftSideBar({
           <ToggleThem open={open} />
         </div>
       </div>
-      <ModalC open={visibleSearch} handleClose={() => setVisibleSearch(false)}>
-        <Search />
+      <ModalC
+        isOpen={visibleSearch}
+        classOverlay="p-0 md:p-4"
+        classWrap="md:w-[35%] overflow-hidden  p-0 min-h-screen md:min-h-fit md:rounded-3xl rounded-none"
+        onclose={() => setVisibleSearch(false)}
+      >
+        <Search items={resultSearch} onclose={() => setVisibleSearch(false)} />
+      </ModalC>
+
+      <ModalC
+        classOverlay="p-0 md:p-4"
+        isOpen={visibleSettings}
+        classWrap="md:w-[60%]  min-h-screen md:rounded-3xl rounded-none"
+        onclose={() => setVisibleSettings(false)}
+        haveHeader
+      >
+        <ModalSetting />
       </ModalC>
     </div>
   );

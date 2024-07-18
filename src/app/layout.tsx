@@ -18,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <div id="modal-root" className="w-full min-h-full"></div>
         <Providers>{children}</Providers>
       </body>
     </html>

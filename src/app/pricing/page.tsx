@@ -1,13 +1,8 @@
-import Layout from "@/Components/Layout/Layout";
-import Pricing from "@/templates/Pricing";
 import React from "react";
+import Pricing from "@/templates/PricingPage";
 
 function PricingPage() {
-  return (
-    <Layout hiddenLeftBar clasName="md:rounded-lg ">
-      <Pricing />
-    </Layout>
-  );
+  return <Pricing />;
 }
 
 export default PricingPage;

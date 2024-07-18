@@ -1,13 +1,8 @@
-import Layout from "@/Components/Layout/Layout";
-import UpdatesAndFaq from "@/templates/updates-and-faq";
+import UpdatesAndFaqPage from "@/templates/UpdatesAndFaqPage";
 import React from "react";
 
 function page() {
-  return (
-    <Layout hiddenLeftBar clasName="md:rounded-lg">
-      <UpdatesAndFaq />
-    </Layout>
-  );
+  return <UpdatesAndFaqPage />;
 }
 
 export default page;

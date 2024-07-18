@@ -7,20 +7,20 @@ import LeftSideBar from "../LeftSideBar";
 import { useTheme } from "next-themes";
 import RightSideBar from "@/Components/RightSideBar/RightSideBar";
 import { ClassNames } from "@emotion/react";
+import { Toaster } from "react-hot-toast";
 
 function Layout({
-  clasName,
+  className,
   hiddenLeftBar,
   children,
 }: {
-  clasName?: string;
+  className?: string;
   hiddenLeftBar: true | false;
   children: ReactNode;
 }) {
   const reactResponsive = useMediaQuery({ query: "(max-width: 624px)" });
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [ShowSideBar, setShowSideBar] = useState<boolean>(true);
-  const [ShowRightSideBar, setShowRightSideBar] = useState<boolean>(true);
   const [openLeftSideBar, setOpenLeftSideBar] = useState<boolean>(true);
   const { setTheme, theme } = useTheme();
 
@@ -33,42 +33,45 @@ function Layout({
   const path = usePathname();
 
   return (
-    <div
-      className={`flex bg-n-7 ${
-        isMobile && ShowSideBar ? "overflow-hidden" : ""
-      } h-full`}
-    >
-      <LeftSideBar
-        open={openLeftSideBar}
-        show={ShowSideBar}
-        setOpen={setOpenLeftSideBar}
-      />
+    <>
       <div
-        dir={hiddenLeftBar ? "ltr" : "rtl"}
-        className={`min-h-screen  ${
-          theme === "dark" ? "dark" : ""
-        } w-full flex flex-col md:flex-row   md:px-2 md:py-5 `}
+        className={`flex bg-n-7 ${
+          isMobile && ShowSideBar ? "overflow-hidden" : ""
+        } h-full`}
       >
-        {!hiddenLeftBar && (
-          <RightSideBar
-            setShow={() => {
-              setShowSideBar((preve) => !preve);
-            }}
-            isMobile={isMobile}
-            show={ShowSideBar}
-          />
-        )}
-
+        <LeftSideBar
+          open={openLeftSideBar}
+          show={ShowSideBar}
+          setOpen={setOpenLeftSideBar}
+        />
         <div
-          dir="ltr"
-          className={`w-full h-full ${
-            isMobile && ShowSideBar && "hidden"
-          }  dark:bg-n-6 overflow-hidden bg-[#f1f1f1] ${clasName}`}
+          dir={hiddenLeftBar ? "ltr" : "rtl"}
+          className={`min-h-screen   ${
+            theme === "dark" ? "dark" : ""
+          } w-full flex flex-col md:flex-row   md:px-2 md:py-5 `}
         >
-          {children}
+          {!hiddenLeftBar && (
+            <RightSideBar
+              setShow={() => {
+                setShowSideBar((preve) => !preve);
+              }}
+              isMobile={isMobile}
+              show={ShowSideBar}
+            />
+          )}
+
+          <div
+            dir="ltr"
+            className={`w-full h-full ${
+              isMobile && ShowSideBar && "hidden"
+            }  dark:bg-n-6 overflow-hidden trasntion bg-[#ffff] ${className}`}
+          >
+            {children}
+          </div>
         </div>
       </div>
-    </div>
+      <Toaster position="bottom-center" />
+    </>
   );
 }
 

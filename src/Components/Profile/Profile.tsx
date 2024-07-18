@@ -10,7 +10,7 @@ function Profile({ open }: { open: boolean | undefined }) {
       } rounded`}
     >
       <div className="flex gap-2 w-full  justify-center items-start">
-        <ProfileImg src="/images/avatar.jpg" open={open} isOnline={true} />
+        <ProfileImg src="/images/avatar.jpg" isOnline={true} bgD={true} />
         {open && (
           <div className="flex flex-col">
             <h2 className="text-[18px] text-white font-medium ">

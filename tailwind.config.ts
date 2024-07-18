@@ -1,17 +1,26 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/templates/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+
   theme: {
     extend: {
+      minWidth: {
+        md: "28rem",
+        sm: "38rem",
+        xl: "40rem",
+      },
       colors: {
         primary: {
           1: "#0084FF",
           2: "#3FDD78",
+          3: "#369eff",
         },
         accent: {
           1: "#D84C10",
@@ -40,4 +49,5 @@ const config: Config = {
   plugins: [],
   darkMode: "class",
 };
+
 export default config;
